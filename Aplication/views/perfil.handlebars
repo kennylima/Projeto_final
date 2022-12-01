@@ -1,0 +1,58 @@
+<h2>Seja bem vindo +nome</h2>
+<a class="btn btn-primary btn-sm" href="/" type="submit">Sair</a>
+<hr>
+<h4>Seus dados</h4>
+<p>Nome:</p>
+<p>E-mail:</p>
+<p>CPF:</p>
+<p>Matrícula da empresa:</p>
+<p>Telefone:</p>
+<a class="w-100 btn btn-lg btn-primary" href="/editarPerfil" type="submit">Editar dados</a>
+<br><br>
+<hr>
+<h4>Dependentes</h4>
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Grau de parentesco</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each usuarios}}
+            <tr>
+                <td>{{this.id_usuario}}</td>
+                <td>{{this.nome_usuario}}</td>
+                <td>{{this.endereco_usuario}}</td>
+                <td><a href="/usuario/edit/{{this.id_usuario}}">Editar</a> | <a href="/usuario/delete/{{this.id_usuario}}">Excluir</a></td>
+            </tr>
+            {{/each}}
+        </tbody> 
+    </table>
+</div>
+<a class="w-100 btn btn-lg btn-primary" href="/perfil/dependente" type="submit">Cadastrar dependente</a>
+<hr>
+<h4>Reservas</h4>
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Churrasqueira</th>
+                <th scope="col">Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each usuarios}}
+            <tr>
+                <td>{{this.id_usuario}}</td>
+                <td>{{this.nome_usuario}}</td>
+                <td><a href="/usuario/edit/{{this.id_usuario}}">Editar</a> | <a href="/usuario/delete/{{this.id_usuario}}">Excluir</a></td>
+            </tr>
+            {{/each}}
+        </tbody> 
+    </table>
+</div>
+<a class="w-100 btn btn-lg btn-primary" href="/perfil/reservas" type="submit">Reservar churrasqueira</a>
+<hr>

@@ -1,0 +1,26 @@
+<h2>Cadastrar dependente</h2>
+<br>
+<form action="/cadastrar" method="post" class="d-flex flex-column">
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Nome:</label>
+        <div class="col-sm-10">
+            <input type="text" name="nome" class="form-control" />
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Telefone:</label>
+        <div class="col-sm-10">
+            <input type="text" name="telefone" class="form-control" />
+        </div>
+    </div>
+    <div class="input-wrapper">
+    <label class="col-sm-2 col-form-label" for="event-category">Parentesco:</label>
+        <select class="col-sm-2 col-form-label ">
+            <option>Cônjuge</option>
+            <option>Filho(a)</option>
+        </select>
+    </div>
+    <hr>
+        <a class="w-100 btn btn-lg btn-primary" href="/perfil" type="submit">Cadastrar dependente</a>
+    </div>
+</form>
