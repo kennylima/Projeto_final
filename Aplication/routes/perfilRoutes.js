@@ -5,6 +5,9 @@ const perfilController = require ('../controllers/PerfilController')
 //Chamando a rota do perfil
 router.get('/', perfilController.meuPerfil)
 
+//Chamando a rota de editar o perfil
+router.get('/edit', perfilController.editarPerfil)
+
 //Chamando a rota de cadastro de novos dependentes
 router.get('/dependente', perfilController.novoDependente)
 

@@ -18,11 +18,6 @@ const Administrador = require('./models/Administrador') //Administrador
 const Dependente = require('./models/Dependente') //Dependente
 const Reserva = require('./models/Reserva') //Reserva
 
-//Rota principal
-app.get('/', (req, res)=>{
-    res.render('home')
-})
-
 //Rotas
 const usuariosRoutes = require('./routes/usuariosRoutes')
 const loginRoutes = require('./routes/loginRoutes')
@@ -33,35 +28,10 @@ app.use('/cadastrar', usuariosRoutes)
 app.use('/login', loginRoutes)
 app.use('/perfil', perfilRoutes)
 
-
-// //Rota para editar o perfil
-// app.get('/editarPerfil', (req, res) =>{
-//     res.render('editar-perfil')
-// });
-
-// app.post('/editarPerfil/save', async (req, res) =>{
-//     const id                = req.body.id
-//     const nome              = req.body.nome
-//     const cpf               = req.body.cpf
-//     const email             = req.body.email
-//     const senha             = req.body.senha
-
-//     await Usuarios.update({nome, cpf, email, senha})
-
-//     const telefone = req.body.telefone
-//     const matriculaEmpresa = req.body.matriculaEmpresa
-
-//     await Associados.update({telefone,matriculaEmpresa})
-    
-//     conn.query( (erro) => {
-//         if(erro){
-//             console.log(erro);
-//             return
-//         }    
-//         res.redirect(`/perfil`);   
-//     });
-
-// });
+//Rota principal
+app.get('/', (req, res)=>{
+    res.render('home')
+})
 
 //Rota para perfil administrativo nível 1
 app.get('/adm1', (req, res) =>{
