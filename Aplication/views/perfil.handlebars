@@ -21,12 +21,12 @@
             </tr>
         </thead>
         <tbody>
-            {{#each dependentes}}
+            {{#each dependente}}
             <tr>
-                <td>{{nome}}</td>
-                <td>{{telefone}}</td>
-                <td>{{parentesco}}</td>
-                <td><a href="/dependente/edit/{{id}}">Editar</a> | <a href="/dependente/delete/{{id}}">Excluir</a></td>
+                <td>{{this.nome}}</td>
+                <td>{{this.telefone}}</td>
+                <td>{{this.parentesco}}</td>
+                <td><a href="/dependente/edit/{{this.id}}">Editar</a> | <a href="/dependente/delete/{{this.id}}">Excluir</a></td>
             </tr>
             {{/each}}
         </tbody> 

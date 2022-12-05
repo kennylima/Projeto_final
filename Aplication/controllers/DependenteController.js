@@ -2,7 +2,8 @@ const Dependente = require('../models/Dependente')
 
 //Chamando a página de cadastro de dependente
 module.exports = class DependenteController {
-    static novoDependente(req, res) {
+    static novoDependente (req, res) {
+        // const dependente = Dependente.findAll({raw: true})
         res.render('dependente')
     }
 
@@ -12,7 +13,7 @@ module.exports = class DependenteController {
         const novoDependente = {
         nome: req.body.nome,
         telefone: req.body.telefone,
-        parentesco: req.body.parentesco,
+        parentesco: req.body.parentesco
         }
 
     await Dependente.create(novoDependente)

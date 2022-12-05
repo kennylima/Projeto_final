@@ -1,6 +1,6 @@
 <h2>Reservar Churrasqueira</h2>
 <br>
-<form action="/cadastrar" method="post" class="d-flex flex-column">
+<form action="/perfil/reservas/save" method="post" class="d-flex flex-column">
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Data:</label>
         <div class="col-sm-10">
@@ -9,13 +9,13 @@
     </div>
     <div class="input-wrapper">
         <label class="col-sm-2 col-form-label" for="event-category">Churrasqueiras:</label>
-            <select class="col-sm-3 col-form-label" name="descricao">
-                <option>Área de lazer</option>
-                <option>Campo de futebol</option>
-                <option>Piscina</option>
+            <select class="col-sm-3 col-form-label" name="local">
+                <option name="Área de lazer">Área de lazer</option>
+                <option name="Campo de futebol">Campo de futebol</option>
+                <option name="Piscina">Piscina</option>
             </select>
     </div>
     <hr>
-        <a class="w-100 btn btn-lg btn-primary" href="/perfil" type="submit">Reservar</a>
+        <input class="w-100 btn btn-lg btn-primary" type="submit" value="Reservar"></input>
     </div>
 </form>

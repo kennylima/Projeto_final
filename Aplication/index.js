@@ -26,10 +26,12 @@ app.get('/', (req, res)=>{
 //Rotas
 const usuariosRoutes = require('./routes/usuariosRoutes')
 const dependentesRoutes = require('./routes/dependentesRoutes')
+const reservasRoutes = require('./routes/reservasRoutes')
 
 //Utilização de rotas
 app.use('/cadastrar', usuariosRoutes)
 app.use('/perfil', dependentesRoutes)
+app.use('/perfil', reservasRoutes)
 
 
 //Rota para logar
@@ -69,20 +71,6 @@ app.post('/editarPerfil/save', async (req, res) =>{
         res.redirect(`/perfil`);   
     });
 
-});
-
-// //Rota para adicionar dependente
-// app.get('/perfil/dependente', (req, res) =>{
-//     res.render('dependente')
-// });
-
-// app.post('/perfil/dependente/save', (req, res) =>{
-    
-// });
-
-//Rota para reservar quiosque
-app.get('/perfil/reservas', (req, res) =>{
-    res.render('reservas')
 });
 
 //Rota para perfil administrativo nível 1
