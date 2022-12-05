@@ -11,7 +11,7 @@ app.set('view engine', 'handlebars')
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-//Importação de módulos
+//Models
 const Usuario = require('./models/Usuario') //Usuário
 const Associado = require('./models/Associado') //Associado
 const Administrador = require('./models/Administrador') //Administrador
@@ -23,33 +23,14 @@ app.get('/', (req, res)=>{
     res.render('home')
 })
 
-//Rota de cadastro
-app.get('/cadastrar', (req, res) =>{
-    res.render('cadastrar')
-});
+//Rotas
+const usuariosRoutes = require('./routes/usuariosRoutes')
+const dependentesRoutes = require('./routes/dependentesRoutes')
 
-app.post('/cadastrar/save', async(req,res)=>{
-    const nome = req.body.nome
-    const cpf = req.body.cpf
-    const email = req.body.email
-    const senha = req.body.senha
+//Utilização de rotas
+app.use('/cadastrar', usuariosRoutes)
+app.use('/perfil', dependentesRoutes)
 
-    await Usuario.create({nome, cpf, email, senha})
-
-    const telefone = req.body.telefone
-    const matriculaEmpresa = req.body.matriculaEmpresa
-    let status = req.body.status
-
-    if(status ==='on'){
-        status = true
-    }else{
-        status = false
-    }
-
-    await Associado.create({telefone,matriculaEmpresa, status})
-
-    res.redirect('/')
-})
 
 //Rota para logar
 app.get('/login', (req, res) =>{
@@ -90,10 +71,14 @@ app.post('/editarPerfil/save', async (req, res) =>{
 
 });
 
-//Rota para adicionar dependente
-app.get('/perfil/dependente', (req, res) =>{
-    res.render('dependente')
-});
+// //Rota para adicionar dependente
+// app.get('/perfil/dependente', (req, res) =>{
+//     res.render('dependente')
+// });
+
+// app.post('/perfil/dependente/save', (req, res) =>{
+    
+// });
 
 //Rota para reservar quiosque
 app.get('/perfil/reservas', (req, res) =>{

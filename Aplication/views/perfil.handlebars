@@ -17,16 +17,16 @@
             <tr>
                 <th scope="col">Nome</th>
                 <th scope="col">Telefone</th>
-                <th scope="col">Grau de parentesco</th>
+                <th scope="col">Parentesco</th>
             </tr>
         </thead>
         <tbody>
-            {{#each usuarios}}
+            {{#each dependentes}}
             <tr>
-                <td>{{this.id_usuario}}</td>
-                <td>{{this.nome_usuario}}</td>
-                <td>{{this.endereco_usuario}}</td>
-                <td><a href="/usuario/edit/{{this.id_usuario}}">Editar</a> | <a href="/usuario/delete/{{this.id_usuario}}">Excluir</a></td>
+                <td>{{nome}}</td>
+                <td>{{telefone}}</td>
+                <td>{{parentesco}}</td>
+                <td><a href="/dependente/edit/{{id}}">Editar</a> | <a href="/dependente/delete/{{id}}">Excluir</a></td>
             </tr>
             {{/each}}
         </tbody> 
