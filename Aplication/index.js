@@ -11,7 +11,7 @@ app.set('view engine', 'handlebars')
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-//Models
+//Models 
 const Usuario = require('./models/Usuario') //Usuário
 const Associado = require('./models/Associado') //Associado
 const Administrador = require('./models/Administrador') //Administrador
@@ -25,53 +25,43 @@ app.get('/', (req, res)=>{
 
 //Rotas
 const usuariosRoutes = require('./routes/usuariosRoutes')
-const dependentesRoutes = require('./routes/dependentesRoutes')
-const reservasRoutes = require('./routes/reservasRoutes')
+const loginRoutes = require('./routes/loginRoutes')
+const perfilRoutes = require('./routes/perfilRoutes')
 
 //Utilização de rotas
 app.use('/cadastrar', usuariosRoutes)
-app.use('/perfil', dependentesRoutes)
-app.use('/perfil', reservasRoutes)
+app.use('/login', loginRoutes)
+app.use('/perfil', perfilRoutes)
 
 
-//Rota para logar
-app.get('/login', (req, res) =>{
-    res.render('login')
-});
+// //Rota para editar o perfil
+// app.get('/editarPerfil', (req, res) =>{
+//     res.render('editar-perfil')
+// });
 
-//Rota do perfil
-app.get('/perfil', (req, res) =>{
-    res.render('perfil')
-});
+// app.post('/editarPerfil/save', async (req, res) =>{
+//     const id                = req.body.id
+//     const nome              = req.body.nome
+//     const cpf               = req.body.cpf
+//     const email             = req.body.email
+//     const senha             = req.body.senha
 
-//Rota para editar o perfil
-app.get('/editarPerfil', (req, res) =>{
-    res.render('editar-perfil')
-});
+//     await Usuarios.update({nome, cpf, email, senha})
 
-app.post('/editarPerfil/save', async (req, res) =>{
-    const id                = req.body.id
-    const nome              = req.body.nome
-    const cpf               = req.body.cpf
-    const email             = req.body.email
-    const senha             = req.body.senha
+//     const telefone = req.body.telefone
+//     const matriculaEmpresa = req.body.matriculaEmpresa
 
-    await Usuarios.update({nome, cpf, email, senha})
-
-    const telefone = req.body.telefone
-    const matriculaEmpresa = req.body.matriculaEmpresa
-
-    await Associados.update({telefone,matriculaEmpresa})
+//     await Associados.update({telefone,matriculaEmpresa})
     
-    conn.query( (erro) => {
-        if(erro){
-            console.log(erro);
-            return
-        }    
-        res.redirect(`/perfil`);   
-    });
+//     conn.query( (erro) => {
+//         if(erro){
+//             console.log(erro);
+//             return
+//         }    
+//         res.redirect(`/perfil`);   
+//     });
 
-});
+// });
 
 //Rota para perfil administrativo nível 1
 app.get('/adm1', (req, res) =>{

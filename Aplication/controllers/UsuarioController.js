@@ -20,8 +20,7 @@ module.exports = class UsuarioController {
         const novoAssociado = {
         telefone: req.body.telefone,
         matriculaEmpresa: req.body.matriculaEmpresa,
-        status: false,
-        // UsuarioId: req.body.usuarioId
+        status: false
         }
 
     await Usuario.create(novoUsuario)

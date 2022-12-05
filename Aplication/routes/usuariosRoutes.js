@@ -6,7 +6,7 @@ const UsuarioController = require ('../controllers/UsuarioController')
 //Chamando a rota de cadastro de novos usuários
 router.get('/', UsuarioController.novoUsuario)
 
-//Rota responsável por salvar os dados da tarefa no banco de dados
+//Rota responsável por salvar os dados do cadastro no banco de dados
 router.post('/save', UsuarioController.salvarUsuario);
 
 module.exports = router
