@@ -11,20 +11,20 @@ app.set('view engine', 'handlebars')
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-//Models 
-const Usuario = require('./models/Usuario') //Usuário
+//Importação dos Models 
 const Associado = require('./models/Associado') //Associado
 const Administrador = require('./models/Administrador') //Administrador
 const Dependente = require('./models/Dependente') //Dependente
 const Reserva = require('./models/Reserva') //Reserva
 
 //Rotas
-const usuariosRoutes = require('./routes/usuariosRoutes')
-const loginRoutes = require('./routes/loginRoutes')
-const perfilRoutes = require('./routes/perfilRoutes')
+const associadoRoutes        = require('./routes/associadoRoutes')
+const loginRoutes           = require('./routes/loginRoutes')
+const perfilRoutes          = require('./routes/perfilRoutes')
+const listarDependentes     = require('./controllers/PerfilController')
 
 //Utilização de rotas
-app.use('/cadastrar', usuariosRoutes)
+app.use('/cadastrar', associadoRoutes)
 app.use('/login', loginRoutes)
 app.use('/perfil', perfilRoutes)
 
@@ -32,16 +32,6 @@ app.use('/perfil', perfilRoutes)
 app.get('/', (req, res)=>{
     res.render('home')
 })
-
-//Rota para perfil administrativo nível 1
-app.get('/adm1', (req, res) =>{
-    res.render('perfilAdmUm')
-});
-
-//Rota para perfil administrativo nível 2
-app.get('/adm2', (req, res) =>{
-    res.render('perfilAdmDois')
-});
 
 //Rota para pesquisa de associado (Nível 1)
 app.get('/pesquisar1', (req, res) =>{

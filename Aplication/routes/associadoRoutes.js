@@ -1,13 +1,13 @@
 const express           = require('express')
 const router            = express.Router()
-const UsuarioController = require ('../controllers/UsuarioController')
+const AssociadoController = require ('../controllers/AssociadoController')
 
 
 //Chamando a rota de cadastro de novos usuários
-router.get('/', UsuarioController.novoUsuario)
+router.get('/', AssociadoController.novoUsuario)
 
 //Rota responsável por salvar os dados do cadastro no banco de dados
-router.post('/save', UsuarioController.salvarUsuario);
+router.post('/save', AssociadoController.salvarUsuario);
 
 module.exports = router
 

@@ -20,14 +20,14 @@
             </tr>
         </thead>
         <tbody>
-            {{#each usuarios}}
+            {{#each reservas}}
             <tr>
-                <td>{{this.id_usuario}}</td>
-                <td>{{this.nome_usuario}}</td>
-                <td>{{this.nome_usuario}}</td>
+                <td>{{this.local}}</td>
+                <td>{{this.local}}</td>
+                <td>{{this.data}}</td>
             </tr>
             {{/each}}
-        </tbody> 
+        </tbody>
     </table>
 </div>
 <hr>
@@ -38,24 +38,25 @@
             <tr>
                 <th scope="col">Nome</th>
                 <th scope="col">CPF</th>
+                <th scope="col">E-mail</th>
                 <th scope="col">Telefone</th>
                 <th scope="col">Matrícula empresa</th>
-                <th scope="col">E-mail</th>
-                <th scope="col">Categoria</th>
+                <th scope="col">Status</th>
+                <th scope="col">Ações</th>
             </tr>
         </thead>
         <tbody>
-            {{#each usuarios}}
+            {{#each associados}}
             <tr>
-                <td>{{this.id_usuario}}</td>
-                <td>{{this.nome_usuario}}</td>
-                <td>{{this.nome_usuario}}</td>
-                <td>{{this.id_usuario}}</td>
-                <td>{{this.nome_usuario}}</td>
-                <td>{{this.nome_usuario}}</td>
-                <td><a href="/usuario/edit/{{this.id_usuario}}">Aceitar</a> | <a href="/usuario/edit/{{this.id_usuario}}">Editar</a> | <a href="/usuario/delete/{{this.id_usuario}}">Excluir</a></td>
-            </tr>
+                <td>{{this.nome}}</td>
+                <td>{{this.cpf}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.telefone}}</td>
+                <td>{{this.matriculaEmpresa}}</td>
+                <td>{{#if this.status}} Ativo {{else}} Inativo {{/if}}</td>
+                <td><a href="/usuario/edit/{{this.id}}">Aceitar</a> | <a href="/usuario/delete/{{this.id_usuario}}">Excluir</a></td>
             {{/each}}
+            </tr>
         </tbody> 
     </table>
 </div>

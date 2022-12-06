@@ -1,6 +1,6 @@
 const {Sequelize} = require('sequelize')
 const sequelize = new Sequelize(
-    'db_aurora', 'root', '', {host: 'localhost', dialect: 'mysql'}
+    'db_clubeaurora', 'root', '', {host: 'localhost', dialect: 'mysql'}
 )
 
 try{
