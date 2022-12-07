@@ -27,7 +27,7 @@
                 <td>{{this.nome}}</td>
                 <td>{{this.telefone}}</td>
                 <td>{{this.parentesco}}</td>
-                <td><a href="/perfil/dependente/edit">Editar</a> | <a href="/perfil/dependente/delete">Excluir</a></td>
+                <td><a href="/perfil/dependente/edit/{{this.id}}">Editar</a> | <a href="/perfil/dependente/delete/{{this.id}}">Excluir</a></td>
             </tr>
             {{/each}}
         </tbody> 
@@ -50,7 +50,7 @@
             <tr>
                 <td>{{this.local}}</td>
                 <td>{{this.data}}</td>
-                <td><a href="/usuario/delete/{{this.id}}">Excluir</a></td>
+                <td><a href="/perfil/reservas/delete/{{this.id}}">Excluir</a></td>
             </tr>
             {{/each}}
         </tbody> 

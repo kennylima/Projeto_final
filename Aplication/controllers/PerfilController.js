@@ -48,10 +48,10 @@ static async salvarDependente(req,res){
     const novoDependente = {
     nome: req.body.nome,
     telefone: req.body.telefone,
-    parentesco: req.body.parentesco
+    parentesco: req.body.parentesco,
+    AssociadoId: 1 //Colocar o req.session.user.id
     }
 
-    
     await Dependente.create(novoDependente)
 
     res.redirect('/perfil')
@@ -60,42 +60,33 @@ static async salvarDependente(req,res){
 //Editando os dados do dependente
 static async editarDependente (req,res){
 
-    // const editarPerfilAssociado = {
-    // nome: req.body.nome,
-    // cpf: req.body.cpf,
-    // telefone: req.body.telefone,
-    // matriculaEmpresa: req.body.matriculaEmpresa,
-    // email: req.body.email,
-    // senha: req.body.senha
-    // }
+    const id = req.params.id
 
-    // await Associado.update(editarPerfilAssociado)
+    const dependente = await Dependente.findOne({where: {id: id}, raw:true})
+    console.log(dependente)
 
-    res.render('dependente-edit')   
+    res.render('dependente-edit', {dependente})   
 }
 
 //Salvando os dados editados do dependente
 static async salvarEdicaoDependente (req,res){
 
-    // const editarPerfilAssociado = {
-    // nome: req.body.nome,
-    // cpf: req.body.cpf,
-    // telefone: req.body.telefone,
-    // matriculaEmpresa: req.body.matriculaEmpresa,
-    // email: req.body.email,
-    // senha: req.body.senha
-    // }
+    const editarPerfilDependente = {
+    nome: req.body.nome,
+    telefone: req.body.telefone,
+    parentesco: req.body.parentesco
+    }
 
-    // await Associado.update(editarPerfilAssociado)
+    const editarDependente = await Dependente.update(editarPerfilDependente, {where: {id: req.body.id}})
 
-    res.redirect(`/perfil`);   
+    res.redirect(`/perfil`)
 }
 
 //Salvando os dados editados do dependente
 static async deletarDependente (req,res){
-    // const id = req.params.id;
+    const id = req.params.id;
 
-    // await Dependente.destroy({where: {id: id}});
+    await Dependente.destroy({where: {id: id}});
 
     res.redirect(`/perfil`);   
 }
@@ -116,6 +107,15 @@ static async salvarReserva(req,res){
     await Reserva.create(novaReserva)
 
     res.redirect('/perfil')
+}
+
+//Chamando a página de cadastro de reservas
+static async deleteReserva (req, res) {
+    const id = req.params.id;
+
+    await Reserva.destroy({where: {id: id}});
+
+    res.redirect(`/perfil`);  
 }
 
 //Chamando a página do administrador nível 1

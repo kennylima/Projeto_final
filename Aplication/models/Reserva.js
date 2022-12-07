@@ -4,7 +4,7 @@ const Associado = require('./Associado')
 
 const Reserva = db.define('Reserva', {
     local:{type:DataTypes.STRING(1000), allowNull: false},
-    data:{type:DataTypes.DATE, allowNull: false},
+    data:{type:DataTypes.DATEONLY, allowNull: false},
 })
 
 Reserva.belongsTo(Associado)
