@@ -1,13 +1,13 @@
-<h2>Seja bem vindo +nome</h2>
+<h2>Olá, {{associado.nome}}</h2>
 <a class="btn btn-primary btn-sm" href="/" type="submit">Sair</a>
 <hr>
 <h4>Seus dados</h4>
-<p>Nome:{{associados.nome}}</p>
-<p>E-mail:{{associados.email}}</p>
-<p>Telefone:{{associados.telefone}}</p>
-<p>Matrícula da empresa:{{associados.matriculaEmpresa}}</p>
-<p>CPF:{{associados.cpf}}</p>
-<a class="w-100 btn btn-lg btn-primary" href="/perfil/edit" type="submit">Editar dados</a>
+<p>Nome: {{associado.nome}}</p>
+<p>E-mail: {{associado.email}}</p>
+<p>Telefone: {{associado.telefone}}</p>
+<p>Matrícula da empresa: {{associado.matriculaEmpresa}}</p>
+<p>CPF: {{associado.cpf}}</p>
+<a class="w-100 btn btn-lg btn-primary" href="/perfil/edit/{{associado.id}}" type="submit">Editar dados</a>
 <br><br>
 <hr>
 <h4>Dependentes</h4>
@@ -33,7 +33,7 @@
         </tbody> 
     </table>
 </div>
-<a class="w-100 btn btn-lg btn-primary" href="/perfil/dependente" type="submit">Cadastrar dependente</a>
+<a class="w-100 btn btn-lg btn-primary" href="/perfil/dependente/{{associado.id}}" type="submit">Cadastrar dependente</a>
 <hr>
 <h4>Reservas</h4>
 <div class="table-responsive">
@@ -56,5 +56,5 @@
         </tbody> 
     </table>
 </div>
-<a class="w-100 btn btn-lg btn-primary" href="/perfil/reservas" type="submit">Reservar churrasqueira</a>
+<a class="w-100 btn btn-lg btn-primary" href="/perfil/reservas/{{associado.id}}" type="submit">Reservar churrasqueira</a>
 <hr>

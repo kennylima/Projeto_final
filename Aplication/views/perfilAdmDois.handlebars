@@ -1,4 +1,4 @@
-<h2>Seja bem vindo +nome</h2>
+<h2>Olá, {{administrador.nome}}</h2>
 <a class="btn btn-primary btn-sm" href="/" type="submit">Sair</a>
 <hr>
 <h4>Pesquisar associado</h4>
@@ -23,7 +23,7 @@
             {{#each reservas}}
             <tr>
                 <td>{{this.local}}</td>
-                <td>{{this.nome}}</td>{{!--DUVIDA!!!--}}
+                <td>{{this.[Associado.nome]}}</td>
                 <td>{{this.data}}</td>
             </tr>
             {{/each}}
@@ -54,7 +54,10 @@
                 <td>{{this.telefone}}</td>
                 <td>{{this.matriculaEmpresa}}</td>
                 <td>{{#if this.status}} Ativo {{else}} Inativo {{/if}}</td>
-                <td><a href="/usuario/edit/{{this.id}}">Aceitar</a> | <a href="/usuario/delete/{{this.id_usuario}}">Excluir</a></td>
+                <td>
+                <form action="/perfil/administrador/aprovar/{{this.id}}" method="post"><button type="submit" class="link-primary" style="background-color: transparent; text-decoration:underline; border:none;">Aceitar</button></form>
+                <form action="/perfil/administrador/deletar/{{this.id}}" method="post"><button type="submit" class="link-primary" style="background-color: transparent; text-decoration:underline; border:none;">Deletar</button></form>
+                </td>
             {{/each}}
             </tr>
         </tbody> 

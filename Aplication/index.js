@@ -3,7 +3,7 @@ const expbhs    = require ('express-handlebars')
 const conn      = require('./db/conn')
 const app       = express()
 const session   = require('express-session')
-const Filestore = require('session-file-store')(session)
+const FileStore = require('session-file-store')(session)
 const flash     = require('express-flash')
 
 // //Configurando o template engine
@@ -60,9 +60,9 @@ app.use(
         secret: 'nosso-secret',
         resave: false,
         saveUninitialized: false,
-        store: new Filestore ({
-            logfn: function () {},
-            path: require('path').join(require('os').tmpdir(), 'session')
+        store: new FileStore({
+            logFn: function () {},
+            path: require('path').join(require('os').tmpdir(), 'sessions')
         }),
         cookie: {
             secure: false,
@@ -74,7 +74,7 @@ app.use(
 )
 
 //Setar sessões para requisição
-app.use((req, res, next)=>{
+app.use((req, res, next) => {
     if(req.session.userId){
         res.locals.session = req.session
     }

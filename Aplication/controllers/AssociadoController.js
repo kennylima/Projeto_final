@@ -1,9 +1,9 @@
 const Associado = require('../models/Associado')
-
 const bcrypt = require('bcryptjs')
 
-//Chamando a página de cadastro
 module.exports = class AssociadoController {
+
+//Chamando a página de cadastro
     static novoUsuario(req, res) {
         res.render('cadastrar')
     }
@@ -13,16 +13,6 @@ module.exports = class AssociadoController {
 
         //Pegar os dados do formulário
         const {nome, cpf, telefone, matriculaEmpresa, email, senha, status} = req.body
-
-        // const novoAssociado = {
-        // nome: req.body.nome,
-        // cpf: req.body.cpf,
-        // telefone: req.body.telefone,
-        // matriculaEmpresa: req.body.matriculaEmpresa,
-        // email: req.body.email,
-        // senha: req.body.senha,
-        // status: false,
-        // }
 
         //Confirmar se o email cadastrado já existe no BD
         const userExist = await Associado.findOne({where: {email: email}})
@@ -37,7 +27,7 @@ module.exports = class AssociadoController {
         const salt = bcrypt.genSaltSync(10)
         const senhaCriptografada = bcrypt.hashSync(senha, salt)
 
-        //Criar usuário
+        //Criar novo associado
         try {
             const associadoNovo = {nome, cpf, telefone, matriculaEmpresa, email, senha: senhaCriptografada, status}
 
@@ -48,7 +38,5 @@ module.exports = class AssociadoController {
         } catch (error) {
             console.log(error)
         }
-
-
     }
 }
