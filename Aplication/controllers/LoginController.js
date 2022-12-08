@@ -13,55 +13,73 @@ module.exports = class LoginController {
         //Pegar dados digitados na requisição de login
         const {email, senha} = req.body
 
-        if(await Associado.findOne({raw: true, where: {email: email}})){
+        const associadoExist = await Associado.findOne({raw: true, where: {email: email}})
+        
+        if(associadoExist){
 
-        //Validar se o usuário existe
-        const userExist = await Associado.findOne({raw: true, where: {email: email}})
+            //Validar se a senha cadastrada existe
+            const senhaCadastrada = bcrypt.compareSync(senha, associadoExist.senha)
 
-        //Validar se a senha cadastrada existe
-        const senhaCadastrada = bcrypt.compareSync(senha, userExist.senha)
-
-        if(!senhaCadastrada){
-            console.log("Senha incorreta")
-            res.redirect('/login')
-            return
-        }
-
-        // // Guardando o identificador do usuário na sessão
-        // console.log(req.session)
-        // req.session.userId = userExist.id
-
-        // req.session.save(() => {
-        //     console.log('Fez o login de forma correta!');
-            if(userExist.status == 0){
+            if(!senhaCadastrada){
+                console.log("Email e/ou senha incorreto!")
                 res.redirect('/login')
-            }else{
-            res.redirect(`/perfil/${userExist.id}`)
+                return
             }
-        // })
 
-        } else if(await Administrador.findOne({raw:true, where: {email: email}})){
-            const administrador =  await Administrador.findOne({raw:true, where: {email: email}})
-            if(administrador.senha != senha){
-                console.log("senha incorreta")
-                res.redirect('/login')
-            } else{
-                if(administrador.nivelAcesso == 0){
-                    // req.session.save(() => {
-                    //     console.log('Fez o login de forma correta!');
-                        res.redirect(`/perfil/administrador/1`)
-                    // })
-                } else{
-                    // req.session.save(() => {
-                        // console.log('Fez o login de forma correta!');
-                        res.redirect(`/perfil/administrador/2`)
-                    // })
+            // Guardando o identificador do usuário na sessão
+            req.session.userId = associadoExist.id
+
+            req.session.save(() => {
+                console.log("Login de associado realizado com sucesso!")
+
+                if(associadoExist.status == 0){
+                    res.redirect('/login')
+                }else{
+                    res.redirect(`/perfil/${associadoExist.id}`)
                 }
+            })
+
+        }else{
+            const administradorExist = await Administrador.findOne({raw:true, where: {email: email}})
+            
+            if(!administradorExist){
+                console.log("Usuário não encontrado")
+                res.redirect('/login')
+                return
             }
+
+            //Validar se a senha cadastrada existe
+            const senhaDigitada = senha
+
+            if(senhaDigitada != administradorExist.senha){
+
+                console.log("Email e/ou senha incorreto!")
+                res.redirect('/login')
+                return
+            }
+
+
+            // Guardando o identificador do usuário na sessão
+            req.session.userId = administradorExist.id
+
+            req.session.save(() => {
+                console.log("Sessão salva.");
+
+                if(administradorExist.nivelAcesso == 0){
+                    console.log("Login de administrador nível 1 realizado com sucesso!")
+                    res.redirect(`/perfil/administrador/1`)
+                }else{
+                    console.log("Login de administrador nível 2 realizado com sucesso!")
+                    res.redirect(`/perfil/administrador/2`)
+                }
+            })
         }
-        else{
-            console.log("Email ou senha inválido")
-            res.redirect('/login')
+    }
+
+    static logout(req, res) {
+        if(req.session.userId){
+            req.session.destroy()
+            res.redirect('/')
         }
     }
 }

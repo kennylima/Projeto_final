@@ -15,9 +15,13 @@
       </a>
 
       <ul class="nav nav-pills">
-        <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Página inicial</a></li>
+        {{#if session.userId}}
+        <li class="nav-item"><a href="/login/logout" class="nav-link active">Sair</a></li>
+        {{else}}
+        <li class="nav-item"><a href="/" class="nav-link active">Página inicial</a></li>
         <li class="nav-item"><a href="/cadastrar" class="nav-link">Cadastrar</a></li>
-         <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+        <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+        {{/if}}
       </ul>
     </header>
   </div>
