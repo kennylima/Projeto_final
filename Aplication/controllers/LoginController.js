@@ -2,21 +2,20 @@ const Associado = require('../models/Associado')
 const Administrador = require('../models/Administrador')
 const bcrypt = require('bcryptjs')
 
-//Chamando a página de cadastro
 module.exports = class LoginController {
+    
+    //Renderiza a página de login
     static async novoLogin(req, res) {
         res.render('login')
     }
 
+    //Função de logar (Diferencia usuário de administrador o login)
     static async loginUser(req, res) {
-
         //Pegar dados digitados na requisição de login
         const {email, senha} = req.body
-
         const associadoExist = await Associado.findOne({raw: true, where: {email: email}})
         
         if(associadoExist){
-
             //Validar se a senha cadastrada existe
             const senhaCadastrada = bcrypt.compareSync(senha, associadoExist.senha)
 
@@ -28,13 +27,18 @@ module.exports = class LoginController {
 
             // Guardando o identificador do usuário na sessão
             req.session.userId = associadoExist.id
-
+            req.session.userAdm = false 
+            
             req.session.save(() => {
-                console.log("Login de associado realizado com sucesso!")
-
+                
                 if(associadoExist.status == 0){
-                    res.redirect('/login')
+                    console.log("Login não autorizado pelo administrador!")
+                    if(req.session.userId){
+                        req.session.destroy()
+                        res.redirect('/login')
+                    }
                 }else{
+                    console.log("Login de associado realizado com sucesso!")
                     res.redirect(`/perfil/${associadoExist.id}`)
                 }
             })
@@ -52,18 +56,17 @@ module.exports = class LoginController {
             const senhaDigitada = senha
 
             if(senhaDigitada != administradorExist.senha){
-
                 console.log("Email e/ou senha incorreto!")
                 res.redirect('/login')
                 return
             }
 
-
             // Guardando o identificador do usuário na sessão
             req.session.userId = administradorExist.id
+            req.session.userAdm = true
 
             req.session.save(() => {
-                console.log("Sessão salva.");
+                console.log("Sessão salva.")
 
                 if(administradorExist.nivelAcesso == 0){
                     console.log("Login de administrador nível 1 realizado com sucesso!")
@@ -76,6 +79,7 @@ module.exports = class LoginController {
         }
     }
 
+    //Função de logout
     static logout(req, res) {
         if(req.session.userId){
             req.session.destroy()

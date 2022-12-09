@@ -3,20 +3,20 @@ const bcrypt = require('bcryptjs')
 
 module.exports = class AssociadoController {
 
-//Chamando a página de cadastro
+//Renderiza a página de cadastro
     static novoUsuario(req, res) {
         res.render('cadastrar')
     }
 
-//Salvando os dados do usuário
+//Função para dados cadastrados
     static async salvarUsuario(req,res){
 
         //Pegar os dados do formulário
         const {nome, cpf, telefone, matriculaEmpresa, email, senha, status} = req.body
 
-        //Confirmar se o email cadastrado já existe no BD
+        //Verificar se o email cadastrado já existe no BD
         const userExist = await Associado.findOne({where: {email: email}})
-        
+
         if(userExist){
             console.log("Usuário já cadastrado")
             res.redirect('/cadastrar')
@@ -32,9 +32,13 @@ module.exports = class AssociadoController {
             const associadoNovo = {nome, cpf, telefone, matriculaEmpresa, email, senha: senhaCriptografada, status}
 
             await Associado.create(associadoNovo)
-            
-            res.redirect('/')
 
+            req.flash('sucesso', 'Sucesso')
+            req.flash('message', 'Conta criada com sucesso!')
+
+            req.session.save(() =>{
+                res.redirect('/')
+            })
         } catch (error) {
             console.log(error)
         }

@@ -2,47 +2,57 @@ const express           = require('express')
 const router            = express.Router()
 const perfilController = require ('../controllers/PerfilController')
 const checarLogado      = require('../helpers/auth').checarLogado
+const checarAdm      = require('../helpers/auth').checarAdm
 
-//Chamando a rota do perfil
+//Rota do perfil
 router.get('/:id', checarLogado, perfilController.meuPerfil)
 
-//Chamando a rota de editar o perfil
+//Rota para editar o perfil
 router.get('/edit/:id', checarLogado, perfilController.editarPerfil)
 
-//Chamando a rota de salvar a edição do perfil
+//Rota para salvar a edição do perfil
 router.post('/edit/save/:id', checarLogado, perfilController.salvarPerfil);
 
-//Chamando a rota de cadastro de novos dependentes
+//Rota para cadastrar novos dependentes
 router.get('/dependente/:id', checarLogado, perfilController.novoDependente)
 
-//Chamando a rota para editar os dependentes do usuário
-router.get('/dependente/edit/:id', checarLogado, perfilController.editarDependente)
-
-//Chamando a rota de salvar a edição do dependente
-router.post('/dependente/edit/save/:id', checarLogado, perfilController.salvarEdicaoDependente);
-
-//Chamando a rota para excluir o dependente selecionado
-router.get('/dependente/delete/:id', checarLogado, perfilController.deletarDependente)
-
-//Rota responsável por salvar os dados editados do dependente
+//Rota para salvar novos dependentes
 router.post('/dependente/save/:id', checarLogado, perfilController.salvarDependente)
 
-//Chamando a rota de cadastro de novas reservas
+//Rota para editar os dependentes cadastrados
+router.get('/dependente/edit/:id', checarLogado, perfilController.editarDependente)
+
+//Rota para salvar os dados editados do dependente
+router.post('/dependente/edit/save/:id', checarLogado, perfilController.salvarEdicaoDependente);
+
+//Rota para excluir um dependente
+router.get('/dependente/delete/:id', checarLogado, perfilController.deletarDependente)
+
+//Rota para cadastrar nova reserva
 router.get('/reservas/:id', checarLogado, perfilController.novaReserva)
 
-//Rota responsável por salvar os dados da reserva no banco de dados
+//Rota para salvar nova reserva
 router.post('/reservas/save/:id', checarLogado, perfilController.salvarReserva)
 
-//Chamando a rota de cadastro de novas reservas
+//Rota para deletar reserva
 router.get('/reservas/delete/:id', checarLogado, perfilController.deleteReserva)
 
-//Chamando a rota do perfil administrador 1
-router.get('/administrador/1', checarLogado, perfilController.loginAdministradorUm)
+//Rota do perfil administrador nível 1
+router.get('/administrador/1', checarAdm, perfilController.loginAdministradorUm)
 
-//Chamando a rota do perfil administrador 2
-router.get('/administrador/2', checarLogado, perfilController.loginAdministradorDois)
+//Rota para pesquisa de associado pelo administrador nível 1
+router.get('/administrador/1/pesquisar', checarAdm, perfilController.pesquisaAdministradorUm)
 
-//Chamando a rota do perfil administrador 2
-router.post('/administrador/aprovar/:id', checarLogado, perfilController.aprovarNovoUsuario)
+//Rota do perfil administrador nível 2
+router.get('/administrador/2', checarAdm, perfilController.loginAdministradorDois)
+
+//Rota do perfil administrador nível 2 para aprovar novos associados
+router.post('/administrador/aprovar/:id', checarAdm, perfilController.aprovarNovoUsuario)
+
+//Rota do perfil administrador nível 2 para recusar novos associados
+router.get('/administrador/2/delete/:id', checarAdm, perfilController.deleteAssociado)
+
+//Rota para pesquisa de associado pelo administrador nível 2
+router.get('/administrador/2/pesquisar', checarAdm, perfilController.pesquisaAdministradorDois)
 
 module.exports = router

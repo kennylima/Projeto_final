@@ -7,16 +7,16 @@
                 <th scope="col">Associado</th>
                 <th scope="col">Status</th>
                 <th scope="col">Dependentes</th>
+                <th scope="col">Parentesco</th>
             </tr>
         </thead>
         <tbody>
-            {{#each associado}}
             <tr>
-                <td>{{this.nome}}</td>
-                <td>{{this.status}}</td>
-                <td>{{this.nome-dependente}}</td>
+                <td>{{associado.nome}}</td>
+                <td>{{#if associado.status}} Ativo {{else}} Inativo {{/if}}</td>
+                <td >{{#each dependentes}}<p>{{this.nome}}</p> {{/each}}</td>
+                <td>{{#each dependentes}}<p>{{this.parentesco}}</p> {{/each}}</td>
             </tr>
-            {{/each}}
         </tbody> 
     </table>
 </div>

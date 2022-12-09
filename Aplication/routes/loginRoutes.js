@@ -3,13 +3,13 @@ const router            = express.Router()
 const LoginController   = require ('../controllers/LoginController')
 const checarLogado      = require('../helpers/auth').checarLogado
 
-//Chamando a rota da tela de login
+//Rota de login
 router.get('/', LoginController.novoLogin)
 
-//Chamando a rota de login
+//Rota para verificar os dados de login
 router.post('/', LoginController.loginUser)
 
-//Chamando a rota de logout
-router.get('/logout', checarLogado, LoginController.logout)
+//Rota de logout
+router.get('/logout', LoginController.logout)
 
 module.exports = router

@@ -1,4 +1,6 @@
 const {Sequelize} = require('sequelize')
+
+//Função para conectar com o banco de dados
 const sequelize = new Sequelize(
     'db_clubeaurora', 'root', '', {host: 'localhost', dialect: 'mysql'}
 )

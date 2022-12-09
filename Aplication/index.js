@@ -46,13 +46,13 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 //Importação dos Models 
-const Associado = require('./models/Associado') //Associado
+const Associado     = require('./models/Associado') //Associado
 const Administrador = require('./models/Administrador') //Administrador
-const Dependente = require('./models/Dependente') //Dependente
-const Reserva = require('./models/Reserva') //Reserva
+const Dependente    = require('./models/Dependente') //Dependente
+const Reserva       = require('./models/Reserva') //Reserva
 
 //Rotas
-const associadoRoutes        = require('./routes/associadoRoutes')
+const associadoRoutes       = require('./routes/associadoRoutes')
 const loginRoutes           = require('./routes/loginRoutes')
 const perfilRoutes          = require('./routes/perfilRoutes')
 const listarDependentes     = require('./controllers/PerfilController')
@@ -66,16 +66,6 @@ app.use('/perfil', perfilRoutes)
 app.get('/', (req, res)=>{
     res.render('home')
 })
-
-//Rota para pesquisa de associado (Nível 1)
-app.get('/pesquisar1', (req, res) =>{
-    res.render('resultadoPesquisaUm')
-});
-
-//Rota para pesquisa de associado (Nível 2)
-app.get('/pesquisar2', (req, res) =>{
-    res.render('resultadoPesquisaDois')
-});
 
 //Conexão BD
 conn.sync().then(()=>{

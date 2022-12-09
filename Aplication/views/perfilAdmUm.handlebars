@@ -2,11 +2,12 @@
 <hr>
 <h4>Pesquisar associado</h4>
 <br>
-    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-        <input type="search" class="form-control form-control-light text-bg-light" placeholder="Digite o nome do associado" aria-label="Search">
-        <br>
-        <a class="w-100 btn btn-lg btn-primary" href="/pesquisar1" type="submit">Pesquisar</a>
+    <form action="/perfil/administrador/1/pesquisar" method="GET" class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" name="search" type="text" placeholder="Digite o nome completo do associado" aria-label="Search">
+    <br>
+    <input class="w-100 btn btn-lg btn-primary" type="submit" value="Pesquisar">
     </form>
+<br>
 <hr>
 <h4>Reservas</h4>
 <div class="table-responsive">
@@ -22,7 +23,7 @@
             {{#each reservas}}
             <tr>
                 <td>{{this.local}}</td>
-                <td>{{this.local}}</td>
+                <td>{{this.[Associado.nome]}}</td>
                 <td>{{this.data}}</td>
             </tr>
             {{/each}}

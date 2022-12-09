@@ -1,6 +1,7 @@
 const {DataTypes} = require('sequelize')
 const db = require('../db/conn')
 
+//Função para cadastrar a tabela administrador no BD
 const Administrador = db.define('Administrador', {
     nome:{type:DataTypes.STRING(500), allowNull: false},
     email:{type:DataTypes.STRING(500), allowNull: false},

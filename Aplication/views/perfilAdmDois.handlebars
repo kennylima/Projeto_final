@@ -2,10 +2,10 @@
 <hr>
 <h4>Pesquisar associado</h4>
 <br>
-    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-        <input type="search" class="form-control form-control-light text-bg-light" placeholder="Digite o nome do associado" aria-label="Search">
-        <br>
-        <a class="w-100 btn btn-lg btn-primary" href="/pesquisar2" type="submit">Pesquisar</a>
+    <form action="/perfil/administrador/2/pesquisar" method="GET" class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" name="search" type="text" placeholder="Digite o nome completo do associado" aria-label="Search">
+    <br>
+    <input class="w-100 btn btn-lg btn-primary" type="submit" value="Pesquisar">
     </form>
 <hr>
 <h4>Reservas</h4>
@@ -30,7 +30,7 @@
     </table>
 </div>
 <hr>
-<h4>Novos usuários</h4>
+<h4>Novos associados</h4>
 <div class="table-responsive">
     <table class="table table-striped table-sm">
         <thead>
@@ -55,11 +55,10 @@
                 <td>{{#if this.status}} Ativo {{else}} Inativo {{/if}}</td>
                 <td>
                 <form action="/perfil/administrador/aprovar/{{this.id}}" method="post"><button type="submit" class="link-primary" style="background-color: transparent; text-decoration:underline; border:none;">Aceitar</button></form>
-                <form action="/perfil/administrador/deletar/{{this.id}}" method="post"><button type="submit" class="link-primary" style="background-color: transparent; text-decoration:underline; border:none;">Deletar</button></form>
+                <form action="/perfil/administrador/2/delete/{{this.id}}" method="get"><button type="submit" class="link-primary" style="background-color: transparent; text-decoration:underline; border:none;">Deletar</button></form>
                 </td>
             {{/each}}
             </tr>
         </tbody> 
     </table>
 </div>
-

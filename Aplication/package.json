@@ -8,7 +8,7 @@
     "start": "nodemon ./index.js localhost 3000"
   },
   "keywords": [],
-  "author": "",
+  "author": "Kenny Lima",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
