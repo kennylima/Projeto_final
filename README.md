@@ -2,6 +2,8 @@
 
 ![preview](./.github/preview.png)
 
+## Sistema desenvolvido no projeto Rio Pomba Valley em parceria com a Energisa, Senai e EduLivre. 
+
 > Sobre:
 
 Seguindo uma situação problema disponibilizada na pasta *documentation*, foi desenvolvido um projeto para administrar um clube de esportes. O projeto foi idealizado com três tipos de clientes. O associado, o administrador nível 1 e administrador nível 2. Neste sistema é possível:
