@@ -20,28 +20,37 @@ module.exports = class LoginController {
             const senhaCadastrada = bcrypt.compareSync(senha, associadoExist.senha)
 
             if(!senhaCadastrada){
+                req.flash('atencao', 'Atenção!')
+                req.flash('message', 'Email e/ou senha incorreto!')
+
+                req.session.save(() =>{
+                    res.redirect('/login')
+                })
                 console.log("Email e/ou senha incorreto!")
-                res.redirect('/login')
                 return
             }
-
-            // Guardando o identificador do usuário na sessão
-            req.session.userId = associadoExist.id
-            req.session.userAdm = false 
-            
-            req.session.save(() => {
                 
                 if(associadoExist.status == 0){
                     console.log("Login não autorizado pelo administrador!")
-                    if(req.session.userId){
-                        req.session.destroy()
+
+                    req.flash('atencao', 'Atenção!')
+                    req.flash('message', 'Associado não liberado!')
+
+                    req.session.save(() =>{
                         res.redirect('/login')
-                    }
+                    })
+                        return
                 }else{
+                    // Guardando o identificador do usuário na sessão
+                    req.session.userId = associadoExist.id
+                    req.session.userAdm = false 
+
                     console.log("Login de associado realizado com sucesso!")
-                    res.redirect(`/perfil/${associadoExist.id}`)
+                    req.session.save(() =>{
+                        
+                        res.redirect(`/perfil/${associadoExist.id}`)
+                    })
                 }
-            })
 
         }else{
             const administradorExist = await Administrador.findOne({raw:true, where: {email: email}})

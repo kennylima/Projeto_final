@@ -1,4 +1,4 @@
-const { Op } = require('sequelize')
+const { Op, DATE } = require('sequelize')
 const Dependente = require('../models/Dependente')
 const Reserva = require('../models/Reserva')
 const Associado = require('../models/Associado')
@@ -123,10 +123,23 @@ module.exports = class PerfilController {
 
         if(await Reserva.findOne({raw: true, where:{local: req.body.local, data: req.body.data}})){
             console.log("Data indisponivel")
-            res.redirect(`/perfil/reservas/${id}`)
+
+            req.flash('atencao', 'Atenção!')
+            req.flash('message', 'Data indisponível para esta churrasqueira!')
+
+            req.session.save(() =>{
+                res.redirect(`/perfil/reservas/${id}`)
+            })
+
         }else{
             const salvarReserva = await Reserva.create(novaReserva, {where: {id: req.body.id}})
-            res.redirect(`/perfil/${associado.id}`)
+
+            req.flash('sucesso', 'Sucesso!')
+            req.flash('message', 'Churrasqueira reservada com sucesso!')
+
+            req.session.save(() =>{
+                res.redirect(`/perfil/${associado.id}`)
+            })
         }
     }
 
